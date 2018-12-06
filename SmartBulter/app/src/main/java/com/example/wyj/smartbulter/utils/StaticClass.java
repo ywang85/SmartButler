@@ -7,4 +7,7 @@ public class StaticClass {
 
     // 判断是不是第一次运行
     public static final String SHARE_IS_FIRST = "isfirst";
+
+    // bugly key
+    public static final String BUGLY_APP_ID = "28da30240f";
 }

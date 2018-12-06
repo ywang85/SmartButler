@@ -18,6 +18,7 @@ import com.example.wyj.smartbulter.fragment.GrilFragment;
 import com.example.wyj.smartbulter.fragment.UserFragment;
 import com.example.wyj.smartbulter.fragment.WechatFragment;
 import com.example.wyj.smartbulter.ui.SettingActivity;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initData();
         initView();
+
+        
     }
 
     private void initData() {

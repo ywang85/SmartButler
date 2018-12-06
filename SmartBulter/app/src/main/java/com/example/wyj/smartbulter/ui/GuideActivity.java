@@ -1,5 +1,6 @@
 package com.example.wyj.smartbulter.ui;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -7,15 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.wyj.smartbulter.MainActivity;
 import com.example.wyj.smartbulter.R;
 import com.example.wyj.smartbulter.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
 
@@ -25,6 +28,9 @@ public class GuideActivity extends AppCompatActivity {
 
     // 小圆点
     private ImageView point1, point2, point3;
+
+    // 跳过
+    private ImageView iv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,9 @@ public class GuideActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        iv_back = findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(this);
+
         point1 = findViewById(R.id.point1);
         point2 = findViewById(R.id.point2);
         point3 = findViewById(R.id.point3);
@@ -47,6 +56,8 @@ public class GuideActivity extends AppCompatActivity {
         view1 = View.inflate(this, R.layout.pager_item_one, null);
         view2 = View.inflate(this, R.layout.pager_item_two, null);
         view3 = View.inflate(this, R.layout.pager_item_three, null);
+
+        view3.findViewById(R.id.btn_start).setOnClickListener(this);
         list.add(view1);
         list.add(view2);
         list.add(view3);
@@ -68,12 +79,15 @@ public class GuideActivity extends AppCompatActivity {
                 switch (i) {
                     case 0:
                         setPointImg(true, false, false);
+                        iv_back.setVisibility(View.VISIBLE);
                         break;
                     case 1:
                         setPointImg(false, true, false);
+                        iv_back.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         setPointImg(false, false, true);
+                        iv_back.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -83,6 +97,19 @@ public class GuideActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_start:
+            case R.id.iv_back:
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+
+
+        }
     }
 
     class GuideAdapter extends PagerAdapter {
