@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.wyj.smartbulter">
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS"
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
+
+    <!-- 允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".application.BaseApplication"
@@ -18,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SplashActivity"
+        <activity
+            android:name=".ui.SplashActivity"
             android:theme="@style/NoActivityFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +43,16 @@
             android:label="@string/title_activity_setting" />
         <!-- 主页 -->
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.GuideActivity"
-            android:theme="@style/NoActivityFullScreen">
-        </activity>
+        <activity
+            android:name=".ui.GuideActivity"
+            android:theme="@style/NoActivityFullScreen" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="登录" />
+        <activity
+            android:name=".ui.RegisteredActivity"
+            android:label="注册" />
+        <activity android:name=".ui.ForgetPasswordActivity"></activity>
     </application>
 
 </manifest>
