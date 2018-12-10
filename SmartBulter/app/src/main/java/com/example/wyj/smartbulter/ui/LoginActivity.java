@@ -1,9 +1,10 @@
 package com.example.wyj.smartbulter.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +16,7 @@ import com.example.wyj.smartbulter.MainActivity;
 import com.example.wyj.smartbulter.R;
 import com.example.wyj.smartbulter.entity.MyUser;
 import com.example.wyj.smartbulter.utils.ShareUtils;
+import com.example.wyj.smartbulter.view.CustomDialog;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox keep_password;
     private TextView tv_forget;
 
+    private CustomDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initView() {
+
         btn_registered = findViewById(R.id.btn_register);
         btn_registered.setOnClickListener(this);
         et_name = findViewById(R.id.et_name);
@@ -56,6 +61,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         tv_forget = findViewById(R.id.tv_forget);
         tv_forget.setOnClickListener(this);
+
+        dialog = new CustomDialog(this, 100, 100, R.layout.dialog_loading, R.style.Theme_dialog,
+                Gravity.CENTER, R.style.pop_anim_style);
+        // 屏幕外点击无效
+        dialog.setCancelable(false);
     }
 
     @Override
@@ -70,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String password = et_password.getText().toString();
                 // 判断是否为空
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)) {
+                    dialog.show();
                     // 登录
                     final MyUser user = new MyUser();
                     user.setUsername(name);
@@ -77,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     user.login(new SaveListener<MyUser>() {
                         @Override
                         public void done(MyUser myUser, BmobException e) {
+                            dialog.dismiss();
                             if (e == null) {
                                 // 判断邮箱是否验证
                                 if (user.getEmailVerified()) {
