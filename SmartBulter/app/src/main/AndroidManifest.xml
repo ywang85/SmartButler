@@ -52,7 +52,8 @@
         <activity
             android:name=".ui.RegisteredActivity"
             android:label="注册" />
-        <activity android:name=".ui.ForgetPasswordActivity"></activity>
+        <activity android:name=".ui.ForgetPasswordActivity" />
+        <activity android:name=".ui.CourierActivity"></activity>
     </application>
 
 </manifest>

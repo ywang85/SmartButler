@@ -13,4 +13,7 @@ public class StaticClass {
 
     // bmob key
     public static final String BOMB_APP_ID = "4549f78e9e68e5d640a279ddcbd51003";
+
+    // 电影key
+    public static final String COURIER_KEY = "dfa8a09865c9c90d4ff2ba95ffba859d";
 }
